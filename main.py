@@ -42,21 +42,20 @@ controller.move_sprite(Guardian, 150,150)
 #set up enemies
 def on_updated_interval():
     Eel = sprites.create(img("""
-    9 9 9 . . . . 5 . . . . 5 . 5 .
-    6 6 6 9 9 . 5 . . . . 5 . . . 5
-    . 6 6 6 6 9 . . 9 9 9 . . . 5 .
-    . . 6 6 6 6 9 9 6 6 6 9 9 . . .
-    . . . 6 6 6 6 6 6 6 6 6 6 . . .
-    . . 5 . . 6 6 6 6 . 6 6 6 2 6 6
-    . 5 . . . . . . 5 . . . 6 6 1 1
-    . . 5 . . . . 5 . . . . 6 6 6 6
-    . 5 . . . . . . 5 . . . . . . .
-    . . . . . . . 5 . . . 5 . . . .
-"""))
-   
+        9 9 9 . . . . 5 . . . . 5 . 5 .
+        6 6 6 9 9 . 5 . . . . 5 . . . 5
+        . 6 6 6 6 9 . . 9 9 9 . . . 5 .
+        . . 6 6 6 6 9 9 6 6 6 9 9 . . .
+        . . . 6 6 6 6 6 6 6 6 6 6 . . .
+        . . 5 . . 6 6 6 6 . 6 6 6 2 6 6
+        . 5 . . . . . . 5 . . . 6 6 1 1
+        . . 5 . . . . 5 . . . . 6 6 6 6
+        . 5 . . . . . . 5 . . . . . . .
+        . . . . . . . 5 . . . 5 . . . .
+    """))
+    Eel.set_position(scene.screen_width(), randint(120,0))
 
-Anglerfish = sprites.create(img("""
-    . . . . . . . . . . . . . . . .
+my_sprite = sprites.create(img(""" 
     . . . . . . . . . . . . . . . .
     . . . . . . . . . . . . . . . .
     . . . . . . . . . f f f . . . .
@@ -69,9 +68,7 @@ Anglerfish = sprites.create(img("""
     e e e . e e e e e e . 1 . e . .
     . e e . . . f e e e e e e e . .
     e e e . . . . . f f e e . . . .
-    . . . . . . . . . . . . . . . .
-"""))
-Anglerfish.set_position(scene.screen_width(), randint(160,0))
+    . . . . . . . . . . . . . . . ."""))
 
 #shoot enemies w projectile
  
