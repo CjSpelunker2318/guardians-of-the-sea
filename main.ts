@@ -37,23 +37,18 @@ Guardian.setFlag(SpriteFlag.StayInScreen, true)
 // player controls
 controller.moveSprite(Guardian, 150, 150)
 // set up enemies
-function on_updated_interval() {
-    let Eel = sprites.create(img`
-        9 9 9 . . . . 5 . . . . 5 . 5 .
-        6 6 6 9 9 . 5 . . . . 5 . . . 5
-        . 6 6 6 6 9 . . 9 9 9 . . . 5 .
-        . . 6 6 6 6 9 9 6 6 6 9 9 . . .
-        . . . 6 6 6 6 6 6 6 6 6 6 . . .
-        . . 5 . . 6 6 6 6 . 6 6 6 2 6 6
-        . 5 . . . . . . 5 . . . 6 6 1 1
-        . . 5 . . . . 5 . . . . 6 6 6 6
-        . 5 . . . . . . 5 . . . . . . .
-        . . . . . . . 5 . . . 5 . . . .
-    `)
-    Eel.setPosition(scene.screenWidth(), randint(120, 0))
-}
-
-let my_sprite = sprites.create(img` 
+let Eel = sprites.create(img`    9 9 9 . . . . 5 . . . . 5 . 5 .
+    6 6 6 9 9 . 5 . . . . 5 . . . 5
+    . 6 6 6 6 9 . . 9 9 9 . . . 5 .
+    . . 6 6 6 6 9 9 6 6 6 9 9 . . .
+    . . . 6 6 6 6 6 6 6 6 6 6 . . .
+    . . 5 . . 6 6 6 6 . 6 6 6 2 6 6
+    . 5 . . . . . . 5 . . . 6 6 1 1
+    . . 5 . . . . 5 . . . . 6 6 6 6
+    . 5 . . . . . . 5 . . . . . . .
+    . . . . . . . 5 . . . 5 . . . . `)
+Eel.setPosition(10, scene.screenHeight() / 2)
+let Anglerfish = sprites.create(img` 
     . . . . . . . . . . . . . . . .
     . . . . . . . . . . . . . . . .
     . . . . . . . . . f f f . . . .
