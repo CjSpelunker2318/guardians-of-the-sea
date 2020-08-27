@@ -15,12 +15,12 @@ Guardian = sprites.create(img("""
     . . . . . . . . . 4 4 . 9 9 . 4 4 . . .
     . . . . . . . 4 4 4 4 4 4 4 4 4 4 . . .
     . . . . . . 4 4 4 4 4 4 4 4 4 4 4 . . .
-    . . . c c c 4 4 e 4 4 4 4 . . . . . . .
-    . . c c b c 4 4 e 4 4 4 4 . . . . . . .
-    . c c 4 b 4 4 4 e 4 4 4 4 . . . . . . .
-    . c c 4 b 4 4 e c 4 4 4 4 . . . . . . .
-    . . c c b c c c c e 4 4 4 . . . . . . .
-    . . . c c c c c c e e 4 4 . . . . . . .
+    . . . a a a 4 4 e 4 4 4 4 . . . . . . .
+    . . a a b a 4 4 e 4 4 4 4 . . . . . . .
+    . a a 4 b 4 4 4 e 4 4 4 4 . . . . . . .
+    . a a 4 b 4 4 e a 4 4 4 4 . . . . . . .
+    . . a a b a a a a e 4 4 4 . . . . . . .
+    . . . a a a a a a e e 4 4 . . . . . . .
     . . . . . . . . 7 7 7 7 7 . . . . . . .
     . . . . . . . . 7 7 7 7 7 7 . . . . . .
     . . 6 6 . . . . 7 7 7 7 7 7 7 . . . . .
@@ -32,12 +32,12 @@ Guardian = sprites.create(img("""
     . . . . . . 6 7 7 7 7 7 7 7 7 6 . . . .
     . . . . . . . . . 6 7 7 7 6 . . . . . .
 """))
+Guardian.set_kind(SpriteKind.player)
+Guardian.set_position(145, scene.screen_height()/2)
+Guardian.set_flag(SpriteFlag.StayInScreen, True)
 
-
-
-
-#generate player controls
-
+#player controls
+controller.move_sprite(Guardian, 150,150)
 #set up enemies
 
 #shoot enemies w projectile
