@@ -50,8 +50,9 @@ Eel = sprites.create(img("""    9 9 9 . . . . 5 . . . . 5 . 5 .
     . . 5 . . . . 5 . . . . 6 6 6 6
     . 5 . . . . . . 5 . . . . . . .
     . . . . . . . 5 . . . 5 . . . . """))
-   
+Eel.set_kind(SpriteKind.enemy)
 Eel.set_position(10, scene.screen_height()/2)
+Eel.set_velocity(50, 0)
 
 Anglerfish = sprites.create(img(""" 
     . . . . . . . . . . . . . . . .
@@ -67,6 +68,7 @@ Anglerfish = sprites.create(img("""
     . e e . . . f e e e e e e e . .
     e e e . . . . . f f e e . . . .
     . . . . . . . . . . . . . . . ."""))
+Anglerfish.set_kind(SpriteKind.enemy)
 
 #shoot enemies w projectile
  

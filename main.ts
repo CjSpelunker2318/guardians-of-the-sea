@@ -47,7 +47,9 @@ let Eel = sprites.create(img`    9 9 9 . . . . 5 . . . . 5 . 5 .
     . . 5 . . . . 5 . . . . 6 6 6 6
     . 5 . . . . . . 5 . . . . . . .
     . . . . . . . 5 . . . 5 . . . . `)
+Eel.setKind(SpriteKind.Enemy)
 Eel.setPosition(10, scene.screenHeight() / 2)
+Eel.setVelocity(50, 0)
 let Anglerfish = sprites.create(img` 
     . . . . . . . . . . . . . . . .
     . . . . . . . . . . . . . . . .
@@ -62,3 +64,4 @@ let Anglerfish = sprites.create(img`
     . e e . . . f e e e e e e e . .
     e e e . . . . . f f e e . . . .
     . . . . . . . . . . . . . . . .`)
+Anglerfish.setKind(SpriteKind.Enemy)
