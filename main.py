@@ -55,9 +55,8 @@ def on_update_interval():
     Eel.set_position(0, randint(0,scene.screen_height()))
     Eel.set_velocity(40, 0) 
     game.on_update_interval(900, on_update_interval)
-    if info.score()>10:
-        def on_update_interval2():
-            Anglerfish = sprites.create(img(""" 
+
+    Anglerfish = sprites.create(img(""" 
     . . . . . . . . . . . . . . . .
     . . . . . . . . . . . . . . . .
     . . . . . . . . . f f f . . . .
@@ -71,13 +70,12 @@ def on_update_interval():
     . e e . . . f e e e e e e e . .
     e e e . . . . . f f e e . . . .
     . . . . . . . . . . . . . . . ."""))
-            Anglerfish.set_kind(SpriteKind.enemy)
-            Anglerfish.set_position(0, randint(0,scene.screen_height()))
-            Anglerfish.set_velocity(20, 0)
+    Anglerfish.set_kind(SpriteKind.enemy)
+    Anglerfish.set_position(0, randint(0,scene.screen_height()))
+    Anglerfish.set_velocity(20, 0)
 game.on_update_interval(1100, on_update_interval)
 
-def on_update_interval3():
-    Shark = sprites.create(img("""
+Shark = sprites.create(img("""
         . . . . . . . . . . . . . f 6 9 f . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . f 6 9 f f . . . . . . . . . . . .
         . . . . . . . . . . . . . . 8 6 6 9 9 f . . . . . . . . . . .
@@ -96,9 +94,9 @@ def on_update_interval3():
         . . . . . . . . . . f f 8 8 8 8 9 f f f f f f . . . . . . . .
         . . . . . . . . . . . . f f f f 8 . . . . . . . . . . . . . .
     """))
-    Shark.set_kind(SpriteKind.enemy)
-    Shark.set_position(0, randint(0,scene.screen_height()))
-    Shark.set_velocity(20, 0)
+Shark.set_kind(SpriteKind.enemy)
+Shark.set_position(0, randint(0,scene.screen_height()))
+Shark.set_velocity(20, 0)
 game.on_update_interval(2000, on_update_interval)
 
 #shoot enemies w projectile

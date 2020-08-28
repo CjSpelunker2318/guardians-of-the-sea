@@ -52,9 +52,7 @@ function on_update_interval() {
     Eel.setPosition(0, randint(0, scene.screenHeight()))
     Eel.setVelocity(40, 0)
     game.onUpdateInterval(900, on_update_interval)
-    if (info.score() > 10) {
-        function on_update_interval2() {
-            let Anglerfish = sprites.create(img` 
+    let Anglerfish = sprites.create(img` 
     . . . . . . . . . . . . . . . .
     . . . . . . . . . . . . . . . .
     . . . . . . . . . f f f . . . .
@@ -68,18 +66,13 @@ function on_update_interval() {
     . e e . . . f e e e e e e e . .
     e e e . . . . . f f e e . . . .
     . . . . . . . . . . . . . . . .`)
-            Anglerfish.setKind(SpriteKind.Enemy)
-            Anglerfish.setPosition(0, randint(0, scene.screenHeight()))
-            Anglerfish.setVelocity(20, 0)
-        }
-        
-    }
-    
+    Anglerfish.setKind(SpriteKind.Enemy)
+    Anglerfish.setPosition(0, randint(0, scene.screenHeight()))
+    Anglerfish.setVelocity(20, 0)
 }
 
 game.onUpdateInterval(1100, on_update_interval)
-function on_update_interval3() {
-    let Shark = sprites.create(img`
+let Shark = sprites.create(img`
         . . . . . . . . . . . . . f 6 9 f . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . f 6 9 f f . . . . . . . . . . . .
         . . . . . . . . . . . . . . 8 6 6 9 9 f . . . . . . . . . . .
@@ -98,9 +91,7 @@ function on_update_interval3() {
         . . . . . . . . . . f f 8 8 8 8 9 f f f f f f . . . . . . . .
         . . . . . . . . . . . . f f f f 8 . . . . . . . . . . . . . .
     `)
-    Shark.setKind(SpriteKind.Enemy)
-    Shark.setPosition(0, randint(0, scene.screenHeight()))
-    Shark.setVelocity(20, 0)
-}
-
+Shark.setKind(SpriteKind.Enemy)
+Shark.setPosition(0, randint(0, scene.screenHeight()))
+Shark.setVelocity(20, 0)
 game.onUpdateInterval(2000, on_update_interval)
