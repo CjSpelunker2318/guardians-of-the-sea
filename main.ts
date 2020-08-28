@@ -65,3 +65,5 @@ let Anglerfish = sprites.create(img`
     e e e . . . . . f f e e . . . .
     . . . . . . . . . . . . . . . .`)
 Anglerfish.setKind(SpriteKind.Enemy)
+Anglerfish.setPosition(0, randint(0, scene.screenHeight()))
+Anglerfish.setVelocity(50, 0)

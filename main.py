@@ -69,7 +69,8 @@ Anglerfish = sprites.create(img("""
     e e e . . . . . f f e e . . . .
     . . . . . . . . . . . . . . . ."""))
 Anglerfish.set_kind(SpriteKind.enemy)
-
+Anglerfish.set_position(0, randint(0,scene.screen_height()))
+Anglerfish.set_velocity(50, 0)
 #shoot enemies w projectile
  
 #lose life when hit
