@@ -37,7 +37,47 @@ Guardian.setFlag(SpriteFlag.StayInScreen, true)
 // player controls
 controller.moveSprite(Guardian, 150, 150)
 // set up enemies
-let Shark = sprites.create(img`
+game.onUpdateInterval(900, function on_update_interval() {
+    let Eel = sprites.create(img`    9 9 9 . . . . 5 . . . . 5 . 5 .
+    6 6 6 9 9 . 5 . . . . 5 . . . 5
+    . 6 6 6 6 9 . . 9 9 9 . . . 5 .
+    . . 6 6 6 6 9 9 6 6 6 9 9 . . .
+    . . . 6 6 6 6 6 6 6 6 6 6 . . .
+    . . 5 . . 6 6 6 6 . 6 6 6 2 6 6
+    . 5 . . . . . . 5 . . . 6 6 1 1
+    . . 5 . . . . 5 . . . . 6 6 6 6
+    . 5 . . . . . . 5 . . . . . . .
+    . . . . . . . 5 . . . 5 . . . . `)
+    Eel.setKind(SpriteKind.Enemy)
+    Eel.setPosition(5, randint(0, scene.screenHeight()))
+    Eel.setVelocity(40, 0)
+    function on_update() {
+        let Anglerfish: Sprite;
+        if (info.score() > 10) {
+            Anglerfish = sprites.create(img` 
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . f f f . . . .
+    e e e . . . . . f . . . f f . .
+    . e e . . . . . f . . . . . f .
+    e e e . f e e e e e . . . . 5 .
+    . e e f e f e e e 2 2 e . . 5 .
+    e e e e e 3 3 e e e e e e . . .
+    . e e e 3 3 3 e e e 1 . 1 . . .
+    e e e . e e e e e e . 1 . e . .
+    . e e . . . f e e e e e e e . .
+    e e e . . . . . f f e e . . . .
+    . . . . . . . . . . . . . . . .`)
+            Anglerfish.setKind(SpriteKind.Enemy)
+            Anglerfish.setPosition(0, randint(0, scene.screenHeight()))
+            Anglerfish.setVelocity(20, 0)
+            game.onUpdate(on_update)
+        }
+        
+    }
+    
+    function on_update2() {
+        let Shark = sprites.create(img`
         . . . . . . . . . . . . . f 6 9 f . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . f 6 9 f f . . . . . . . . . . . .
         . . . . . . . . . . . . . . 8 6 6 9 9 f . . . . . . . . . . .
@@ -56,38 +96,24 @@ let Shark = sprites.create(img`
         . . . . . . . . . . f f 8 8 8 8 9 f f f f f f . . . . . . . .
         . . . . . . . . . . . . f f f f 8 . . . . . . . . . . . . . .
     `)
-Shark.setKind(SpriteKind.Enemy)
-Shark.setPosition(0, randint(0, scene.screenHeight()))
-Shark.setVelocity(20, 0)
-game.onUpdateInterval(2000, function on_update_interval() {
-    let Eel = sprites.create(img`    9 9 9 . . . . 5 . . . . 5 . 5 .
-    6 6 6 9 9 . 5 . . . . 5 . . . 5
-    . 6 6 6 6 9 . . 9 9 9 . . . 5 .
-    . . 6 6 6 6 9 9 6 6 6 9 9 . . .
-    . . . 6 6 6 6 6 6 6 6 6 6 . . .
-    . . 5 . . 6 6 6 6 . 6 6 6 2 6 6
-    . 5 . . . . . . 5 . . . 6 6 1 1
-    . . 5 . . . . 5 . . . . 6 6 6 6
-    . 5 . . . . . . 5 . . . . . . .
-    . . . . . . . 5 . . . 5 . . . . `)
-    Eel.setKind(SpriteKind.Enemy)
-    Eel.setPosition(0, randint(0, scene.screenHeight()))
-    Eel.setVelocity(40, 0)
-    let Anglerfish = sprites.create(img` 
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . f f f . . . .
-    e e e . . . . . f . . . f f . .
-    . e e . . . . . f . . . . . f .
-    e e e . f e e e e e . . . . 5 .
-    . e e f e f e e e 2 2 e . . 5 .
-    e e e e e 3 3 e e e e e e . . .
-    . e e e 3 3 3 e e e 1 . 1 . . .
-    e e e . e e e e e e . 1 . e . .
-    . e e . . . f e e e e e e e . .
-    e e e . . . . . f f e e . . . .
-    . . . . . . . . . . . . . . . .`)
-    Anglerfish.setKind(SpriteKind.Enemy)
-    Anglerfish.setPosition(0, randint(0, scene.screenHeight()))
-    Anglerfish.setVelocity(20, 0)
+        Shark.setKind(SpriteKind.Enemy)
+        Shark.setPosition(0, randint(0, scene.screenHeight()))
+        Shark.setVelocity(20, 0)
+        game.onUpdate(on_update)
+    }
+    
+})
+// shoot enemies w projectile
+controller.player1.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function on_button_event_a_pressed() {
+    let trident = sprites.createProjectileFromSprite(img`
+    . . . . . . . . . . . . . . . . . . . .
+    . 5 . . . . . . . . . . . . . . . . . .
+    5 . 5 . 5 5 5 5 . . . . . . . . . . . .
+    . . . . . . . 5 . . . . . . . . . . . .
+    5 . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+    . . . . . . . 5 . . . . . . . . . . . .
+    5 . 5 . 5 5 5 5 . . . . . . . . . . . .
+    . 5 . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . .
+    `, Guardian, -70, 0)
 })

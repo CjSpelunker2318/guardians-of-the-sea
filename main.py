@@ -52,10 +52,12 @@ def on_update_interval():
     . 5 . . . . . . 5 . . . . . . .
     . . . . . . . 5 . . . 5 . . . . """))
     Eel.set_kind(SpriteKind.enemy)
-    Eel.set_position(0, randint(0,scene.screen_height()))
-    Eel.set_velocity(40, 0) 
+    Eel.set_position(5, randint(0,scene.screen_height()))
+    Eel.set_velocity(40, 0)
 
-    Anglerfish = sprites.create(img(""" 
+    def on_update():
+        if info.score()>10:
+            Anglerfish = sprites.create(img(""" 
     . . . . . . . . . . . . . . . .
     . . . . . . . . . . . . . . . .
     . . . . . . . . . f f f . . . .
@@ -69,11 +71,12 @@ def on_update_interval():
     . e e . . . f e e e e e e e . .
     e e e . . . . . f f e e . . . .
     . . . . . . . . . . . . . . . ."""))
-    Anglerfish.set_kind(SpriteKind.enemy)
-    Anglerfish.set_position(0, randint(0,scene.screen_height()))
-    Anglerfish.set_velocity(20, 0)
-
-Shark = sprites.create(img("""
+            Anglerfish.set_kind(SpriteKind.enemy)
+            Anglerfish.set_position(0, randint(0,scene.screen_height()))
+            Anglerfish.set_velocity(20, 0)
+            game.on_update(on_update)
+    def on_update2():
+        Shark = sprites.create(img("""
         . . . . . . . . . . . . . f 6 9 f . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . f 6 9 f f . . . . . . . . . . . .
         . . . . . . . . . . . . . . 8 6 6 9 9 f . . . . . . . . . . .
@@ -92,13 +95,27 @@ Shark = sprites.create(img("""
         . . . . . . . . . . f f 8 8 8 8 9 f f f f f f . . . . . . . .
         . . . . . . . . . . . . f f f f 8 . . . . . . . . . . . . . .
     """))
-Shark.set_kind(SpriteKind.enemy)
-Shark.set_position(0, randint(0,scene.screen_height()))
-Shark.set_velocity(20, 0)
-game.on_update_interval(2000, on_update_interval)
+        Shark.set_kind(SpriteKind.enemy)
+        Shark.set_position(0, randint(0,scene.screen_height()))
+        Shark.set_velocity(20, 0)
+        game.on_update(on_update)
+game.on_update_interval(900, on_update_interval)
 
 #shoot enemies w projectile
- 
+def on_button_event_a_pressed():
+    trident = sprites.create_projectile_from_sprite(img("""
+    . . . . . . . . . . . . . . . . . . . .
+    . 5 . . . . . . . . . . . . . . . . . .
+    5 . 5 . 5 5 5 5 . . . . . . . . . . . .
+    . . . . . . . 5 . . . . . . . . . . . .
+    5 . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+    . . . . . . . 5 . . . . . . . . . . . .
+    5 . 5 . 5 5 5 5 . . . . . . . . . . . .
+    . 5 . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . .
+    """), Guardian, -70, 0)
+controller.player1.on_button_event(ControllerButton.A, ControllerButtonEvent.PRESSED, on_button_event_a_pressed)
+if 
 #lose life when hit
 
 #destroy enemy when hit
