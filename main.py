@@ -40,7 +40,8 @@ Guardian.set_flag(SpriteFlag.StayInScreen, True)
 controller.move_sprite(Guardian, 150,150)
 
 #set up enemies
-Eel = sprites.create(img("""    9 9 9 . . . . 5 . . . . 5 . 5 .
+def on_update_interval():
+    Eel = sprites.create(img("""    9 9 9 . . . . 5 . . . . 5 . 5 .
     6 6 6 9 9 . 5 . . . . 5 . . . 5
     . 6 6 6 6 9 . . 9 9 9 . . . 5 .
     . . 6 6 6 6 9 9 6 6 6 9 9 . . .
@@ -50,11 +51,13 @@ Eel = sprites.create(img("""    9 9 9 . . . . 5 . . . . 5 . 5 .
     . . 5 . . . . 5 . . . . 6 6 6 6
     . 5 . . . . . . 5 . . . . . . .
     . . . . . . . 5 . . . 5 . . . . """))
-Eel.set_kind(SpriteKind.enemy)
-Eel.set_position(10, scene.screen_height()/2)
-Eel.set_velocity(50, 0)
-
-Anglerfish = sprites.create(img(""" 
+    Eel.set_kind(SpriteKind.enemy)
+    Eel.set_position(0, randint(0,scene.screen_height()))
+    Eel.set_velocity(40, 0) 
+    game.on_update_interval(900, on_update_interval)
+    if info.score()>10:
+        def on_update_interval2():
+            Anglerfish = sprites.create(img(""" 
     . . . . . . . . . . . . . . . .
     . . . . . . . . . . . . . . . .
     . . . . . . . . . f f f . . . .
@@ -68,9 +71,36 @@ Anglerfish = sprites.create(img("""
     . e e . . . f e e e e e e e . .
     e e e . . . . . f f e e . . . .
     . . . . . . . . . . . . . . . ."""))
-Anglerfish.set_kind(SpriteKind.enemy)
-Anglerfish.set_position(0, randint(0,scene.screen_height()))
-Anglerfish.set_velocity(50, 0)
+            Anglerfish.set_kind(SpriteKind.enemy)
+            Anglerfish.set_position(0, randint(0,scene.screen_height()))
+            Anglerfish.set_velocity(20, 0)
+game.on_update_interval(1100, on_update_interval)
+
+def on_update_interval3():
+    Shark = sprites.create(img("""
+        . . . . . . . . . . . . . f 6 9 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f 6 9 f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . . 8 6 6 9 9 f . . . . . . . . . . .
+        f f f . . . . . . . . . . . 8 6 6 6 6 9 f . . . . . . . . . .
+        f 6 6 9 . . . . . . . . . . 8 6 6 6 6 6 6 f f f 9 9 9 f . . .
+        . f 6 6 9 . . . . . . . . f 8 6 6 6 6 6 6 6 6 6 6 6 6 6 f f .
+        . 8 6 6 9 . . . . . f f f 8 6 6 6 6 6 6 6 6 6 f 6 6 6 6 6 9 f
+        . . 8 6 6 9 . . f f 8 8 8 8 6 6 6 6 6 6 6 6 2 2 f 6 6 6 6 9 f
+        . . 8 6 6 f f f 8 8 8 8 8 6 6 6 6 6 6 6 6 6 2 2 d d d d d 6 f
+        . . 8 6 6 8 8 8 8 8 8 8 6 6 6 6 6 6 6 6 d d d d d d d d d f .
+        . 8 6 6 6 6 8 8 8 8 8 8 6 6 6 6 6 6 6 6 d 3 3 1 3 1 3 1 f . .
+        . 8 6 6 f f 8 8 8 8 8 8 8 6 6 6 6 6 6 d d d 3 3 3 3 3 f . . .
+        8 6 6 f . . f 8 8 8 8 8 8 8 9 6 6 6 6 d d d 1 3 3 3 f . . . .
+        f f f . . . . f 8 8 8 8 8 9 9 6 6 6 d d d d d 3 1 f . . . . .
+        . . . . . . . . f f 8 8 9 8 8 8 6 9 d d d d d f f . . . . . .
+        . . . . . . . . . . f f 8 8 8 8 9 f f f f f f . . . . . . . .
+        . . . . . . . . . . . . f f f f 8 . . . . . . . . . . . . . .
+    """))
+    Shark.set_kind(SpriteKind.enemy)
+    Shark.set_position(0, randint(0,scene.screen_height()))
+    Shark.set_velocity(20, 0)
+game.on_update_interval(2000, on_update_interval)
+
 #shoot enemies w projectile
  
 #lose life when hit

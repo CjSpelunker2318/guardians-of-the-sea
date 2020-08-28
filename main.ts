@@ -37,7 +37,8 @@ Guardian.setFlag(SpriteFlag.StayInScreen, true)
 // player controls
 controller.moveSprite(Guardian, 150, 150)
 // set up enemies
-let Eel = sprites.create(img`    9 9 9 . . . . 5 . . . . 5 . 5 .
+function on_update_interval() {
+    let Eel = sprites.create(img`    9 9 9 . . . . 5 . . . . 5 . 5 .
     6 6 6 9 9 . 5 . . . . 5 . . . 5
     . 6 6 6 6 9 . . 9 9 9 . . . 5 .
     . . 6 6 6 6 9 9 6 6 6 9 9 . . .
@@ -47,10 +48,13 @@ let Eel = sprites.create(img`    9 9 9 . . . . 5 . . . . 5 . 5 .
     . . 5 . . . . 5 . . . . 6 6 6 6
     . 5 . . . . . . 5 . . . . . . .
     . . . . . . . 5 . . . 5 . . . . `)
-Eel.setKind(SpriteKind.Enemy)
-Eel.setPosition(10, scene.screenHeight() / 2)
-Eel.setVelocity(50, 0)
-let Anglerfish = sprites.create(img` 
+    Eel.setKind(SpriteKind.Enemy)
+    Eel.setPosition(0, randint(0, scene.screenHeight()))
+    Eel.setVelocity(40, 0)
+    game.onUpdateInterval(900, on_update_interval)
+    if (info.score() > 10) {
+        function on_update_interval2() {
+            let Anglerfish = sprites.create(img` 
     . . . . . . . . . . . . . . . .
     . . . . . . . . . . . . . . . .
     . . . . . . . . . f f f . . . .
@@ -64,6 +68,39 @@ let Anglerfish = sprites.create(img`
     . e e . . . f e e e e e e e . .
     e e e . . . . . f f e e . . . .
     . . . . . . . . . . . . . . . .`)
-Anglerfish.setKind(SpriteKind.Enemy)
-Anglerfish.setPosition(0, randint(0, scene.screenHeight()))
-Anglerfish.setVelocity(50, 0)
+            Anglerfish.setKind(SpriteKind.Enemy)
+            Anglerfish.setPosition(0, randint(0, scene.screenHeight()))
+            Anglerfish.setVelocity(20, 0)
+        }
+        
+    }
+    
+}
+
+game.onUpdateInterval(1100, on_update_interval)
+function on_update_interval3() {
+    let Shark = sprites.create(img`
+        . . . . . . . . . . . . . f 6 9 f . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . f 6 9 f f . . . . . . . . . . . .
+        . . . . . . . . . . . . . . 8 6 6 9 9 f . . . . . . . . . . .
+        f f f . . . . . . . . . . . 8 6 6 6 6 9 f . . . . . . . . . .
+        f 6 6 9 . . . . . . . . . . 8 6 6 6 6 6 6 f f f 9 9 9 f . . .
+        . f 6 6 9 . . . . . . . . f 8 6 6 6 6 6 6 6 6 6 6 6 6 6 f f .
+        . 8 6 6 9 . . . . . f f f 8 6 6 6 6 6 6 6 6 6 f 6 6 6 6 6 9 f
+        . . 8 6 6 9 . . f f 8 8 8 8 6 6 6 6 6 6 6 6 2 2 f 6 6 6 6 9 f
+        . . 8 6 6 f f f 8 8 8 8 8 6 6 6 6 6 6 6 6 6 2 2 d d d d d 6 f
+        . . 8 6 6 8 8 8 8 8 8 8 6 6 6 6 6 6 6 6 d d d d d d d d d f .
+        . 8 6 6 6 6 8 8 8 8 8 8 6 6 6 6 6 6 6 6 d 3 3 1 3 1 3 1 f . .
+        . 8 6 6 f f 8 8 8 8 8 8 8 6 6 6 6 6 6 d d d 3 3 3 3 3 f . . .
+        8 6 6 f . . f 8 8 8 8 8 8 8 9 6 6 6 6 d d d 1 3 3 3 f . . . .
+        f f f . . . . f 8 8 8 8 8 9 9 6 6 6 d d d d d 3 1 f . . . . .
+        . . . . . . . . f f 8 8 9 8 8 8 6 9 d d d d d f f . . . . . .
+        . . . . . . . . . . f f 8 8 8 8 9 f f f f f f . . . . . . . .
+        . . . . . . . . . . . . f f f f 8 . . . . . . . . . . . . . .
+    `)
+    Shark.setKind(SpriteKind.Enemy)
+    Shark.setPosition(0, randint(0, scene.screenHeight()))
+    Shark.setVelocity(20, 0)
+}
+
+game.onUpdateInterval(2000, on_update_interval)
