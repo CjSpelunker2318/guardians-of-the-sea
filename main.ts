@@ -51,57 +51,6 @@ game.onUpdateInterval(900, function on_update_interval() {
     Eel.setKind(SpriteKind.Enemy)
     Eel.setPosition(5, randint(0, scene.screenHeight()))
     Eel.setVelocity(40, 0)
-    function on_update() {
-        let Anglerfish: Sprite;
-        if (info.score() > 10) {
-            Anglerfish = sprites.create(img` 
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . f f f . . . .
-    e e e . . . . . f . . . f f . .
-    . e e . . . . . f . . . . . f .
-    e e e . f e e e e e . . . . 5 .
-    . e e f e f e e e 2 2 e . . 5 .
-    e e e e e 3 3 e e e e e e . . .
-    . e e e 3 3 3 e e e 1 . 1 . . .
-    e e e . e e e e e e . 1 . e . .
-    . e e . . . f e e e e e e e . .
-    e e e . . . . . f f e e . . . .
-    . . . . . . . . . . . . . . . .`)
-            Anglerfish.setKind(SpriteKind.Enemy)
-            Anglerfish.setPosition(0, randint(0, scene.screenHeight()))
-            Anglerfish.setVelocity(20, 0)
-            game.onUpdate(on_update)
-        }
-        
-    }
-    
-    function on_update2() {
-        let Shark = sprites.create(img`
-        . . . . . . . . . . . . . f 6 9 f . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . f 6 9 f f . . . . . . . . . . . .
-        . . . . . . . . . . . . . . 8 6 6 9 9 f . . . . . . . . . . .
-        f f f . . . . . . . . . . . 8 6 6 6 6 9 f . . . . . . . . . .
-        f 6 6 9 . . . . . . . . . . 8 6 6 6 6 6 6 f f f 9 9 9 f . . .
-        . f 6 6 9 . . . . . . . . f 8 6 6 6 6 6 6 6 6 6 6 6 6 6 f f .
-        . 8 6 6 9 . . . . . f f f 8 6 6 6 6 6 6 6 6 6 f 6 6 6 6 6 9 f
-        . . 8 6 6 9 . . f f 8 8 8 8 6 6 6 6 6 6 6 6 2 2 f 6 6 6 6 9 f
-        . . 8 6 6 f f f 8 8 8 8 8 6 6 6 6 6 6 6 6 6 2 2 d d d d d 6 f
-        . . 8 6 6 8 8 8 8 8 8 8 6 6 6 6 6 6 6 6 d d d d d d d d d f .
-        . 8 6 6 6 6 8 8 8 8 8 8 6 6 6 6 6 6 6 6 d 3 3 1 3 1 3 1 f . .
-        . 8 6 6 f f 8 8 8 8 8 8 8 6 6 6 6 6 6 d d d 3 3 3 3 3 f . . .
-        8 6 6 f . . f 8 8 8 8 8 8 8 9 6 6 6 6 d d d 1 3 3 3 f . . . .
-        f f f . . . . f 8 8 8 8 8 9 9 6 6 6 d d d d d 3 1 f . . . . .
-        . . . . . . . . f f 8 8 9 8 8 8 6 9 d d d d d f f . . . . . .
-        . . . . . . . . . . f f 8 8 8 8 9 f f f f f f . . . . . . . .
-        . . . . . . . . . . . . f f f f 8 . . . . . . . . . . . . . .
-    `)
-        Shark.setKind(SpriteKind.Enemy)
-        Shark.setPosition(0, randint(0, scene.screenHeight()))
-        Shark.setVelocity(20, 0)
-        game.onUpdate(on_update)
-    }
-    
 })
 // shoot enemies w projectile
 controller.player1.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function on_button_event_a_pressed() {
@@ -116,4 +65,15 @@ controller.player1.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Press
     . 5 . . . . . . . . . . . . . . . . . .
     . . . . . . . . . . . . . . . . . . . .
     `, Guardian, -70, 0)
+})
+// lose life when hit
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function on_overlap(sprite: Sprite, otherSprite: Sprite) {
+    otherSprite.destroy()
+    info.changeLifeBy(-1)
+})
+// destroy enemy when hit
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function on_enemy_hit(sprite: Sprite, otherSprite: Sprite) {
+    otherSprite.destroy(effects.disintegrate, 80)
+    sprite.destroy()
+    info.changeScoreBy(1)
 })

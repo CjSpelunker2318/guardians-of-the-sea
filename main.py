@@ -54,10 +54,10 @@ def on_update_interval():
     Eel.set_kind(SpriteKind.enemy)
     Eel.set_position(5, randint(0,scene.screen_height()))
     Eel.set_velocity(40, 0)
-
-    def on_update():
-        if info.score()>10:
-            Anglerfish = sprites.create(img(""" 
+game.on_update_interval(900, on_update_interval)
+def on_update_interval2():
+    if info.score()>10:
+        Anglerfish = sprites.create(img(""" 
     . . . . . . . . . . . . . . . .
     . . . . . . . . . . . . . . . .
     . . . . . . . . . f f f . . . .
@@ -71,11 +71,11 @@ def on_update_interval():
     . e e . . . f e e e e e e e . .
     e e e . . . . . f f e e . . . .
     . . . . . . . . . . . . . . . ."""))
-            Anglerfish.set_kind(SpriteKind.enemy)
-            Anglerfish.set_position(0, randint(0,scene.screen_height()))
-            Anglerfish.set_velocity(20, 0)
-            game.on_update(on_update)
-    def on_update2():
+        Anglerfish.set_kind(SpriteKind.enemy)
+        Anglerfish.set_position(0, randint(0,scene.screen_height()))
+        Anglerfish.set_velocity(20, 0)
+        game.on_update_interval2(900, on_update_interval2)
+def on_update_interval3():
         Shark = sprites.create(img("""
         . . . . . . . . . . . . . f 6 9 f . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . f 6 9 f f . . . . . . . . . . . .
@@ -98,8 +98,8 @@ def on_update_interval():
         Shark.set_kind(SpriteKind.enemy)
         Shark.set_position(0, randint(0,scene.screen_height()))
         Shark.set_velocity(20, 0)
-        game.on_update(on_update)
-game.on_update_interval(900, on_update_interval)
+        game.on_update_interval3(900, on_update_interval3)
+
 
 #shoot enemies w projectile
 def on_button_event_a_pressed():
@@ -115,7 +115,16 @@ def on_button_event_a_pressed():
     . . . . . . . . . . . . . . . . . . . .
     """), Guardian, -70, 0)
 controller.player1.on_button_event(ControllerButton.A, ControllerButtonEvent.PRESSED, on_button_event_a_pressed)
-if 
+
 #lose life when hit
+def on_overlap(sprite,otherSprite):
+    otherSprite.destroy()
+    info.change_life_by(-1)
+sprites.on_overlap(SpriteKind.player, SpriteKind.enemy, on_overlap)
 
 #destroy enemy when hit
+def on_enemy_hit(sprite, otherSprite):
+    otherSprite.destroy(effects.disintegrate, 80)
+    sprite.destroy()
+    info.change_score_by(1)
+sprites.on_overlap(SpriteKind.projectile, SpriteKind.enemy, on_enemy_hit)
