@@ -54,7 +54,6 @@ def on_update_interval():
     Eel.set_kind(SpriteKind.enemy)
     Eel.set_position(0, randint(0,scene.screen_height()))
     Eel.set_velocity(40, 0) 
-    game.on_update_interval(900, on_update_interval)
 
     Anglerfish = sprites.create(img(""" 
     . . . . . . . . . . . . . . . .
@@ -73,7 +72,6 @@ def on_update_interval():
     Anglerfish.set_kind(SpriteKind.enemy)
     Anglerfish.set_position(0, randint(0,scene.screen_height()))
     Anglerfish.set_velocity(20, 0)
-game.on_update_interval(1100, on_update_interval)
 
 Shark = sprites.create(img("""
         . . . . . . . . . . . . . f 6 9 f . . . . . . . . . . . . . .
