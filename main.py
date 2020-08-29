@@ -210,10 +210,10 @@ def on_update_interval():
     enemy = sprites.create(eel)
     enemy.set_kind(SpriteKind.enemy)
     enemy.set_position(5, randint(0,scene.screen_height()))
-    if info.score()<10:
-        enemy.set_velocity(25, 0)
+    if info.score()<15:
+        enemy.set_velocity(30, 0)
         enemy.set_image(eel)
-    elif info.score()<25:
+    elif info.score()<30:
         enemy.set_velocity(35, 0)
         enemy.set_image(anglerfish)
     else:
@@ -248,3 +248,48 @@ def on_enemy_hit(sprite, otherSprite):
     sprite.destroy()
     info.change_score_by(1)
 sprites.on_overlap(SpriteKind.projectile, SpriteKind.enemy, on_enemy_hit)
+ 
+ #Extra lives
+# heart = img("""
+#      . f f . . . f f .
+#      f 3 3 f . f 2 2 f
+#      f 3 2 2 f 2 2 2 f
+#      f 2 2 2 2 2 2 2 f
+#      f 2 2 2 2 2 2 2 f
+#      . f f 2 2 2 f f .
+#      . . . f 2 f . . .
+#      . . . . f . . . .
+#  """)
+
+
+def on_update_interval2():
+    heart = sprites.create(img("""
+     . f f . . . f f .
+     f 3 3 f . f 2 2 f
+     f 3 2 2 f 2 2 2 f
+     f 2 2 2 2 2 2 2 f
+     f 2 2 2 2 2 2 2 f
+     . f f 2 2 2 f f .
+     . . . f 2 f . . .
+     . . . . f . . . .
+    """))
+    heart.set_position(5, randint(0,scene.screen_height()))
+    heart.set_velocity(50, 0)
+    heart.set_kind(SpriteKind.food)
+game.on_update_interval(20000, on_update_interval2)
+
+def on_overlap2(sprite, otherSprite):
+    sprite.overlaps_with(otherSprite)
+    otherSprite.destroy(effects.smiles, 100)
+    info.change_life_by(1)
+if info.life() < 5:
+    info.change_life_by(1)
+sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_overlap2)
+
+    # sprite.create(effects.smiles, 20)
+    # otherSprite.destroy(effects.smiles, 100)
+    # info.change_life_by(1)
+    # if info.score() % 10 is 0:
+    #     if info.life() < 5:
+    #         info.change_life_by(1)
+    # sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_heart_recieved)

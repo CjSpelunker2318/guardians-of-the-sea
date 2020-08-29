@@ -207,10 +207,10 @@ game.onUpdateInterval(900, function on_update_interval() {
     let enemy = sprites.create(eel)
     enemy.setKind(SpriteKind.Enemy)
     enemy.setPosition(5, randint(0, scene.screenHeight()))
-    if (info.score() < 10) {
-        enemy.setVelocity(25, 0)
+    if (info.score() < 15) {
+        enemy.setVelocity(30, 0)
         enemy.setImage(eel)
-    } else if (info.score() < 25) {
+    } else if (info.score() < 30) {
         enemy.setVelocity(35, 0)
         enemy.setImage(anglerfish)
     } else {
@@ -243,4 +243,39 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function on_enemy_hit
     otherSprite.destroy(effects.disintegrate, 80)
     sprite.destroy()
     info.changeScoreBy(1)
+})
+// Extra lives
+//  heart = img("""
+//       . f f . . . f f .
+//       f 3 3 f . f 2 2 f
+//       f 3 2 2 f 2 2 2 f
+//       f 2 2 2 2 2 2 2 f
+//       f 2 2 2 2 2 2 2 f
+//       . f f 2 2 2 f f .
+//       . . . f 2 f . . .
+//       . . . . f . . . .
+//   """)
+game.onUpdateInterval(20000, function on_update_interval2() {
+    let heart = sprites.create(img`
+     . f f . . . f f .
+     f 3 3 f . f 2 2 f
+     f 3 2 2 f 2 2 2 f
+     f 2 2 2 2 2 2 2 f
+     f 2 2 2 2 2 2 2 f
+     . f f 2 2 2 f f .
+     . . . f 2 f . . .
+     . . . . f . . . .
+    `)
+    heart.setPosition(5, randint(0, scene.screenHeight()))
+    heart.setVelocity(50, 0)
+    heart.setKind(SpriteKind.Food)
+})
+if (info.life() < 5) {
+    info.changeLifeBy(1)
+}
+
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function on_overlap2(sprite: Sprite, otherSprite: Sprite) {
+    sprite.overlapsWith(otherSprite)
+    otherSprite.destroy(effects.smiles, 100)
+    info.changeLifeBy(1)
 })
