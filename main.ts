@@ -1,6 +1,6 @@
 //  Set up game
 info.setScore(0)
-info.setLife(3)
+info.setLife(2)
 scene.setBackgroundColor(8)
 scene.setBackgroundImage(img`
     . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
@@ -206,7 +206,7 @@ let shark = img`
 game.onUpdateInterval(900, function on_update_interval() {
     let enemy = sprites.create(eel)
     enemy.setKind(SpriteKind.Enemy)
-    enemy.setPosition(5, randint(0, scene.screenHeight()))
+    enemy.setPosition(5, randint(5, scene.screenHeight() - 5))
     if (info.score() < 15) {
         enemy.setVelocity(30, 0)
         enemy.setImage(eel)
@@ -214,7 +214,7 @@ game.onUpdateInterval(900, function on_update_interval() {
         enemy.setVelocity(35, 0)
         enemy.setImage(anglerfish)
     } else {
-        enemy.setVelocity(45, 0)
+        enemy.setVelocity(50, 0)
         enemy.setImage(shark)
     }
     

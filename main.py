@@ -1,6 +1,6 @@
 # Set up game
 info.set_score(0)
-info.set_life(3)
+info.set_life(2)
 scene.set_background_color(8)
 scene.set_background_image(img("""
     . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
@@ -209,7 +209,7 @@ shark = img("""
 def on_update_interval():
     enemy = sprites.create(eel)
     enemy.set_kind(SpriteKind.enemy)
-    enemy.set_position(5, randint(0,scene.screen_height()))
+    enemy.set_position(5, randint(5,scene.screen_height()-5))
     if info.score()<15:
         enemy.set_velocity(30, 0)
         enemy.set_image(eel)
@@ -217,7 +217,7 @@ def on_update_interval():
         enemy.set_velocity(35, 0)
         enemy.set_image(anglerfish)
     else:
-        enemy.set_velocity(45, 0)
+        enemy.set_velocity(50, 0)
         enemy.set_image(shark)
 game.on_update_interval(900, on_update_interval)
 
