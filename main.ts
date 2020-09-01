@@ -206,7 +206,7 @@ let shark = img`
 game.onUpdateInterval(900, function on_update_interval() {
     let enemy = sprites.create(eel)
     enemy.setKind(SpriteKind.Enemy)
-    enemy.setPosition(5, randint(10, scene.screenHeight() - 10))
+    enemy.setPosition(5, randint(10, scene.screenHeight() - 15))
     if (info.score() < 15) {
         enemy.setVelocity(30, 0)
         enemy.setImage(eel)

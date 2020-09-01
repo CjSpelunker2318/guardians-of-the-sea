@@ -209,7 +209,7 @@ shark = img("""
 def on_update_interval():
     enemy = sprites.create(eel)
     enemy.set_kind(SpriteKind.enemy)
-    enemy.set_position(5, randint(10,scene.screen_height()-10))
+    enemy.set_position(5, randint(10,scene.screen_height()-15))
     if info.score()<15:
         enemy.set_velocity(30, 0)
         enemy.set_image(eel)
